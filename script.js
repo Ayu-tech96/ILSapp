@@ -633,8 +633,13 @@ function calculate() {
             let arrow = x >= 0 ? "↓" : "↑";
             let arrowClass = x >= 0 ? "arrow-down" : "arrow-up";
 
+  
+  let isSymmetric = document.getElementById('symmetric').checked;
+            let isAsymmetric = document.getElementById('asymmetric').checked;
             // Adjust heights and slots based on x
-            let A2 = (5 / 0.02) * absX;  // Calculate height for A2
+            
+  if (isSymmetric) {
+  let A2 = (5 / 0.02) * absX;  // Calculate height for A2
             let S2 = (2 / 0.02) * absX;   // Calculate slots for A2
              let heightA2 = Math.abs(A2);
               let slotsA2 = Math.abs(S2);
@@ -650,4 +655,29 @@ function calculate() {
     document.getElementById('a1-slot').innerHTML = Math.abs(slotsA1).toFixed(2) + " slots " + `<span class="${arrowClass}">${arrow}</span>`;
     document.getElementById('a3-height').innerHTML = Math.abs(heightA3).toFixed(2) + " cm " + `<span class="${arrowClass}">${arrow}</span>`;
     document.getElementById('a3-slot').innerHTML = Math.abs(slotsA3).toFixed(2) + " slots " + `<span class="${arrowClass}">${arrow}</span>`;
-        }
+    
+  }
+  else if (isAsymmetric){
+    
+     let A2 = (5 / 0.02) * absX;  // Calculate height for A2
+            let S2 = (2 / 0.02) * absX;   // Calculate slots for A2
+             let heightA2 = Math.abs(A2);
+              let slotsA2 = Math.abs(S2);
+            // Calculate for A1 and A3
+            let heightA1 = (heightA2 * 1);  // Half of A2's height
+            let slotsA1 = (slotsA2 * 1);    // Half of A2's slots
+            let heightA3 = (heightA2 * 1);  // 1.5 times A2's height
+            let slotsA3 = (slotsA2 * 1);    // 1.5 times A2's slots
+
+           document.getElementById('a2-height').innerHTML = Math.abs(heightA2).toFixed(2) + " cm " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a2-slot').innerHTML = Math.abs(slotsA2).toFixed(2) + " slots " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a1-height').innerHTML = Math.abs(heightA1).toFixed(2) + " cm " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a1-slot').innerHTML = Math.abs(slotsA1).toFixed(2) + " slots " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a3-height').innerHTML = Math.abs(heightA3).toFixed(2) + " cm " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a3-slot').innerHTML = Math.abs(slotsA3).toFixed(2) + " slots " + `<span class="${arrowClass}">${arrow}</span>`;
+    
+    
+  }
+     
+}  
+   
