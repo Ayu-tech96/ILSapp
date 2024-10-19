@@ -9,7 +9,7 @@
 <body> 
   
     <div class="container">
-      <h1>ILS Calibration Tool</h1>
+      <h1>ILS(RTS) Calibration Tool</h1>
  <footer>
             <p class="watermark">ILS RCDU AAI</p>
             <p class="credit">By:Ayush Kaushik A.M(CNS), RCDU, AAI</p>
@@ -37,7 +37,8 @@
 
         <!-- Tabs for General Calculations and Calibration Settings -->
         <div class="tab">
-          <button class="tablinks active" id="defaultOpen" onclick="openTab('calibration')">Calibration Settings</button>
+          <button class="tablinks active" id="defaultOpen" onclick="openTab('llz')">Localizer Calibration</button>
+          <button class="tablinks active" id="defaultOpen" onclick="openTab('gp')">GlidePath Calibration</button>
             <button class="tablinks" onclick="openTab('general')">General Calculations</button>
                 <button class="tablinks" onclick="openTab('limits')">ILS ICAO LIMITS</button>
         </div>
@@ -49,7 +50,7 @@
         <!-- Localizer Calibration (LLZ) Section -->
        
           <div id="general" class="tabcontent">
-            <h2>General Calculations for LLZ & GP</h2>
+            <h2>General Calculations for LLZ</h2>
 
             <!-- General Inputs for Localizer Calibration -->
             <div class="input-group">
@@ -89,7 +90,7 @@
   <span id="outputCurrentLLZ" class="outputValue"></span>
 </p>
  <span class="info-button" onclick="showPopup('formulaCurrent')">i</span>
-              
+    <h2>General Calculations for GP</h2>          
               
     <label for="angleAssignGP">Angle Assign (default 3°):</label>
 <input type="number" id="angleAssignGP" placeholder="Enter Angle (default is 3)">
@@ -335,15 +336,15 @@ ILS Point “C” 0.035
       
   
         
-    
+ 
 
- <div id="calibration" class="tabcontent">
+  <div id="llz" class="tabcontent">
             
             
                 <!-- LLZ Calibration (Left Column) -->
                 <section class="calibration-section" id="llz-calibration">
             
-            <h2>Localizer(LLZ) Calibration Adjustments</h2>
+          <h2>Localizer(LLZ)</h2> 
             <div class="input-group">
                                                   
 <h4>Course Width Adjustments</h4>
@@ -361,7 +362,7 @@ ILS Point “C” 0.035
                   
               
                <label for="sboPresentLLZ">SBO Present (dBm):</label>
-<input type="number" id="sboPresentLLZ">
+<input type="number" id="sboPresentLLZ" placeholder="dBm">
 
 <label for="widthMeasureLLZ">Course Width Measure by FIU:</label>
 <input type="number" id="widthMeasureLLZ" placeholder="Degree">
@@ -429,7 +430,7 @@ ILS Point “C” 0.035
 <div class="output-group">
     <p id="result2">
         <span class="labelText">Assigned Course Width Limit:</span>
-        <span id="outputValue" class="outputValue"></span>
+        <span id="outputValue1" class="outputValue"></span>
     </p>
 </div>
 
@@ -440,7 +441,7 @@ ILS Point “C” 0.035
            <h4>Course Width Alarm</h4>
 
 <label for="alarmPercentageLLZN">Alarm Percentage for Narrow Course Width (%):</label> 
-<input type="number" id="alarmPercentageLLZN"> 
+<input type="number" id="alarmPercentageLLZN" placeholder="Enter percentage"> 
 <button onclick="calculateAlarmLLZN()">Calculate SBO for Narrow Alarm</button> 
 <p id="sboNarrowOutputLLZ">
   <span class="labelText">SBO for Narrow Alarm:</span>
@@ -449,7 +450,7 @@ ILS Point “C” 0.035
 <span class="info-button" onclick="showPopup('formulaSBONarrow')">i</span>
 
 <label for="alarmPercentageLLZW">Alarm Percentage for Wide Course Width (%):</label> 
-<input type="number" id="alarmPercentageLLZW"> 
+<input type="number" id="alarmPercentageLLZW" placeholder="Enter percentage"> 
 <button onclick="calculateAlarmLLZW()">Calculate SBO for Wide Alarm</button> 
 <p id="sboWideOutputLLZ">
   <span class="labelText">SBO for Wide Alarm:</span>
@@ -512,24 +513,73 @@ ILS Point “C” 0.035
     <span id="outputClearanceValue" class="outputValue"></span>
   </p>  <span class="info-button" onclick="showPopup('formulaclearancecurrentoutput')">i</span>
 </div>
-
+</div>
   
 
 
   
 
 
-        
+        <div id="gp" class="tabcontent">
 
         <!-- Glide Path Calibration (GP) Section -->
         <section class="calibration-section" id="gp-calibration">
-           <h2>GlidePath(GP) Calibration Adjustments</h2>
+           <h2>GlidePath(GP)</h2>  
 
             <!-- General Inputs for Glide Path Calibration -->
 
             <!-- GP Calibration Adjustments -->
+          
+          
+          
+          
            
           <div class="input-group">
+            
+            
+                <h4>Antenna Height Calculator</h4>
+    
+    <div class="input-section">
+        <label for="angleAssign">Enter Assigned Angle (default = 3): </label>
+        <input type="number" id="angleAssign" value="3" step="0.01" placeholder="Enter Angle">
+        <br>
+        <label for="angleFound">Enter Found Angle: </label>
+        <input type="number" id="angleFound" step="0.01" placeholder="Enter Angle">
+        <br><br>
+        <button onclick="calculate()">Calculate</button>
+    </div>
+
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>Antenna</th>
+                <th>Height</th>
+                <th>Slot</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Upper Antenna (A3)</td>
+                <td id="a3-height"></td>
+                <td id="a3-slot"></td>
+            </tr>
+            <tr>
+                <td>Middle Antenna (A2)</td>
+                <td id="a2-height"></td>
+                <td id="a2-slot"></td>
+            </tr>
+            <tr>
+                <td>Lower Antenna (A1)</td>
+                <td id="a1-height"></td>
+                <td id="a1-slot"></td>
+            </tr>
+        </tbody>
+    </table>
+            
+            
+            
+            
+            
   <h4>Course Width Adjustments</h4>
   
   <label for="middleAntennaDDM">Middle Antenna DDM (With Sign):</label>
@@ -635,18 +685,28 @@ ILS Point “C” 0.035
     </tbody>
 </table>                         
               
- <div class="input-group">
+    <div class="input-group">
   <h4>Clearance Current Alarm</h4>
     <h5>Clearance Current for Alarm(A1 & A3):</h5> <h7>190 MKA</h7>
                                             
                              </div>
               </section>
+ 
       </div>
       
  
   
    
   
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
      
         <div id="formulaPower" class="popup-modal">
