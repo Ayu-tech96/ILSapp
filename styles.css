@@ -403,3 +403,25 @@ th, td {
   font-weight: bold;
     font-size: 35px;
 }
+ 
+
+  label {
+            font-size: 16px; /* Increase font size of labels */
+            margin-right: 1px; /* Space between label and radio button */
+        }
+
+        /* Radio button container */
+        .radio-container {
+            margin: 20px 0; /* Space around the radio buttons */
+        }
+
+        .radio-item {
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Align items vertically */
+            margin-bottom: 5px; /* Space between each radio item */
+        }
+
+        input[type="radio"] {
+            margin-left: 10px; /* Space between label and radio button */
+            transform: scale(1.4); /* Increase size of the radio button */
+        }
