@@ -104,7 +104,7 @@ function calculateAlarmLLZN() {
         // Display the result with different color for the output values
         document.getElementById("outputNarrowValue").innerText = `${sboNarrow.toFixed(2)} dBm`;
     } else {
-        document.getElementById("sboNarrowOutputLLZ").innerHTML = "Invalid input";
+        document.getElementById("outputNarrowValue").innerText = "Invalid input";
     }
 }
 
@@ -120,7 +120,7 @@ function calculateAlarmLLZW() {
         // Display the result with different color for the output values
         document.getElementById("outputWideValue").innerText = `${sboWide.toFixed(2)} dBm`;
     } else {
-        document.getElementById("sboWideOutputLLZ").innerHTML = "Invalid input";
+        document.getElementById("outputWideValue").innerText = "Invalid input";
     }
 }
 
@@ -449,7 +449,7 @@ function calculateValues(inputValueId, inputPercentageId, resultId) {
         let highestValue = x / (1 - (0.01 * y));
 
         // Display the result
-        document.getElementById('outputResult1').innerText = `${lowestValue.toFixed(2)} to ${highestValue.toFixed(2)}`;
+        document.getElementById('outputResult1').innerText = `${lowestValue.toFixed(2)} TO ${highestValue.toFixed(2)}`;
     } else {
         // Show error message if inputs are invalid
         document.getElementById('outputResult1').innerText = "Please enter valid numbers for both fields.";
@@ -469,10 +469,10 @@ function calculateValuesA(inputPId, inputQId, resultId) {
         let increasedValue = inputP * (1 + 0.01 * inputQ); // Increased limit
 
         // Display the result with different color for the output values
-        document.getElementById(resultId).innerHTML = `<span class="labelText">Assigned Course Width Limit:</span> <span class="outputValue">${decreasedValue.toFixed(2)} to ${increasedValue.toFixed(2)}</span>`;
+        document.getElementById('outputValue1').innerText = `${decreasedValue.toFixed(2)} TO ${increasedValue.toFixed(2)}`;
     } else {
         // Display error if inputs are invalid
-        document.getElementById(resultId).innerHTML = "Invalid input";
+        document.getElementById('outputValue1').innerText = "Please enter valid numbers for both fields.";
     }
 }
 
@@ -610,3 +610,44 @@ document.getElementById("defaultOpenLimits").click();
 window.onload = function() {
     filterCategorylimits();
 }
+
+
+function calculate() {
+            // Get input values
+            let angleAssign = parseFloat(document.getElementById('angleAssign').value);
+            let angleFound = parseFloat(document.getElementById('angleFound').value);
+
+            // Calculate x = (angleAssign) - (angleFound)
+            let x = angleAssign - angleFound;
+
+            // Check if x is odd, if so make it even
+            // Odd means the decimal part is not 0 or is 0.01, 0.03, etc.
+            if (Math.round(x * 100) % 2 !== 0) {
+                x = (x >= 0) ? x - 0.01 : x + 0.01;  // Adjust to make x even
+            }
+
+            // Ensure x is taken as absolute value for height and slot calculation
+            let absX = Math.abs(x);
+
+            // Determine the sign of x and set the arrow accordingly
+            let arrow = x >= 0 ? "↓" : "↑";
+            let arrowClass = x >= 0 ? "arrow-down" : "arrow-up";
+
+            // Adjust heights and slots based on x
+            let A2 = (5 / 0.02) * absX;  // Calculate height for A2
+            let S2 = (2 / 0.02) * absX;   // Calculate slots for A2
+             let heightA2 = Math.abs(A2);
+              let slotsA2 = Math.abs(S2);
+            // Calculate for A1 and A3
+            let heightA1 = (heightA2 * 0.5);  // Half of A2's height
+            let slotsA1 = (slotsA2 * 0.5);    // Half of A2's slots
+            let heightA3 = (heightA2 * 1.5);  // 1.5 times A2's height
+            let slotsA3 = (slotsA2 * 1.5);    // 1.5 times A2's slots
+
+           document.getElementById('a2-height').innerHTML = Math.abs(heightA2).toFixed(2) + " cm " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a2-slot').innerHTML = Math.abs(slotsA2).toFixed(2) + " slots " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a1-height').innerHTML = Math.abs(heightA1).toFixed(2) + " cm " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a1-slot').innerHTML = Math.abs(slotsA1).toFixed(2) + " slots " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a3-height').innerHTML = Math.abs(heightA3).toFixed(2) + " cm " + `<span class="${arrowClass}">${arrow}</span>`;
+    document.getElementById('a3-slot').innerHTML = Math.abs(slotsA3).toFixed(2) + " slots " + `<span class="${arrowClass}">${arrow}</span>`;
+        }
