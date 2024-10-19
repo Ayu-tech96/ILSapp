@@ -18,7 +18,7 @@ h1{
     font-weight: bold;
     text-transform: uppercase;
     font-size: 30px; /* Main heading size */
-    color: #333;
+    color: black;
   
 }
 h2 {
@@ -368,4 +368,38 @@ button2:hover {
     color: red; /* Different color for the output value (OrangeRed) */
     font-weight: bold;
     font-size: 1.6em;
+}
+
+.input-section {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 50%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.arrow-down {
+    color: red;
+  font-weight: bold;
+    font-size: 35px;
+}
+
+.arrow-up {
+    color: green;
+  font-weight: bold;
+    font-size: 35px;
 }
