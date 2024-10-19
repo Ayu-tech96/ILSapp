@@ -547,7 +547,8 @@ ILS Point “C” 0.035
         <input type="number" id="angleFound" step="0.01" placeholder="Enter Angle">
         <br><br>
 
-      <div class="radio-container">
+    
+    <div class="radio-container">
         <div class="radio-item">
             <label for="symmetric">Symmetric Course Width</label>
             <input type="radio" name="courseType" id="symmetric" value="symmetric" checked>
@@ -556,6 +557,10 @@ ILS Point “C” 0.035
             <label for="asymmetric">Asymmetric Course Width</label>
             <input type="radio" name="courseType" id="asymmetric" value="asymmetric">
         </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="calculate()">Calculate</button>
     </div>
 
     <table id="resultTable">
