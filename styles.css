@@ -113,8 +113,8 @@ p1 {
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%) rotate(-45deg); /* Center and rotate */
-    font-size: 125px; /* Adjust size as needed */
-    color: rgba(0, 0, 0, 0.06); /* Light color for watermark */
+    font-size: 75px; /* Adjust size as needed */
+    color: rgba(0, 0, 0, 0.04); /* Light color for watermark */
     pointer-events: none; /* Allows clicks to pass through */
     z-index: 999; /* Make sure it’s on top of other elements */
       white-space: nowrap; /* Prevent wrapping */
