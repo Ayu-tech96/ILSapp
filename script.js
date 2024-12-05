@@ -1,3 +1,4 @@
+
 // Localizer (LLZ) Function to convert power from dBm to mW and W
 function convertPowerLLZ() {
     let powerDbm = parseFloat(document.getElementById("powerInputLLZ").value);
@@ -140,17 +141,46 @@ function calculateDDMandCurrentGP() {
         let ddm = (8.75 / 0.36) * (angleAssign-angleEnter); // Use angleAssign for DDM calculation
         // Calculate Current based on the calculated DDM
         let current = (75 / 8.75) * ddm;
+        
 
         // Display the calculated DDM and Current values
         document.getElementById("outputDDMGP").innerText = `${ddm.toFixed(2)}`;
         document.getElementById("outputCurrentGP").innerText = `${current.toFixed(2)} µA`;
+        
+      
+      
     } else {
         // Display "Invalid input" if the input is not valid
         document.getElementById("outputDDMGP").innerText = "Invalid input";
         document.getElementById("outputCurrentGP").innerText = "Invalid input";
     }
+  
 }
  
+
+function calculatesectorwidthGP() {
+    // Get the angleAssign value or default to 3 if not provided
+
+  let anglecomm = parseFloat(document.getElementById("anglecommGP").value) || 3.0;
+    
+    if (!isNaN(anglecomm)) {
+        // Calculate DDM using the new formula
+  
+        let sectorwidth = (0.24)*(anglecomm);
+
+
+        document.getElementById("sectorwidthGP").innerText = `${sectorwidth.toFixed(2)}`;
+      
+      
+    } else {
+        // Display "Invalid input" if the input is not valid
+        document.getElementById("sectorwidthGP").innerText = "Invalid input";
+    }
+  
+}
+
+
+
 
 // Function to calculate DDMs for antennas
 function calculateDDMsGP() {
@@ -681,3 +711,5 @@ function calculate() {
      
 }  
    
+
+
