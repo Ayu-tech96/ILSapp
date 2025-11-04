@@ -1,4 +1,5 @@
 
+
 // Localizer (LLZ) Function to convert power from dBm to mW and W
 function convertPowerLLZ() {
     let powerDbm = parseFloat(document.getElementById("powerInputLLZ").value);
@@ -215,8 +216,7 @@ function calculateAlarmGP() {
     let alarmPercentage = parseFloat(document.getElementById("alarmPercentageGP").value);
 
     // Calculate DDMs based on previous calculations (reuse calculateDDMsGP function)
-    let middleDDMCalc = calculateDDMsGP(); // Get the calculated middle DDM
-
+let middleDDMCalc= parseFloat(document.getElementById("ddm").value);
     if (!isNaN(alarmPercentage) && !isNaN(middleDDMCalc)) {
         // Narrow Alarm Calculations
         let lowerNarrow = ((middleDDMCalc) / (1 - (0.01 * alarmPercentage))) * 0.25;
