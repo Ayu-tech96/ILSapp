@@ -293,8 +293,8 @@ function printPage() {
 // Function to validate the login
 function validateLogin() {
     // Set your predefined username and password
-    const validUsername = "ils01";
-    const validPassword = "ils01";
+    const validUsername = "";
+    const validPassword = "";
 
     // Get the input values
     const username = document.getElementById("username").value;
@@ -709,5 +709,6 @@ function calculate() {
      
 }  
    
+
 
 
